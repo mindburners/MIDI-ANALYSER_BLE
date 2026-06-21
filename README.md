@@ -57,6 +57,7 @@ The intro screen and a short banner confirm which mode is active at boot. In BLE
 - ESP32-WROOM-32E
 - ST7735S 160×128 SPI colour TFT
 - 3-button interface (per-app context-sensitive controls)
+- just upload latest files and remember to change the version number in manifest.json
 
 ---
 Mindburner — Alan G. Watkins
