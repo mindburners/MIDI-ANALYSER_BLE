@@ -9,92 +9,106 @@
   <style>
     body {
       font-family: -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
-      max-width: 480px;
+      max-width: 520px;
       margin: 60px auto;
       text-align: center;
       color: #eee;
       background: #0c0c0c;
       padding: 0 20px 50px;
+      line-height: 1.5;
     }
     img.logo {
-      width: 150px;
-      margin-top: 20px;
-      margin-bottom: 10px;
+      width: 140px;
+      margin: 20px 0 10px;
     }
     h1 { 
-      font-size: 1.4em; 
-      margin-bottom: 0.1em; 
-      letter-spacing: 0.5px; 
+      font-size: 1.5em; 
+      margin-bottom: 0.2em; 
     }
     .sub { 
-      color: #999; 
-      margin-bottom: 30px; 
-      font-size: 1.1em;
+      color: #aaa; 
+      margin-bottom: 25px; 
+      font-size: 1.15em;
     }
     ol { 
       text-align: left; 
       color: #ccc; 
-      line-height: 1.6; 
-      max-width: 380px;
-      margin: 0 auto;
+      max-width: 420px;
+      margin: 0 auto 30px;
+      padding-left: 20px;
+    }
+    .changelog {
+      text-align: left;
+      max-width: 420px;
+      margin: 40px auto;
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 8px;
+      border: 1px solid #333;
+    }
+    .changelog h3 {
+      margin-top: 0;
+      color: #ffcc00;
+    }
+    .changelog ul {
+      padding-left: 20px;
+      text-align: left;
     }
     esp-web-install-button {
       display: block;
-      margin: 30px 0;
+      margin: 30px auto;
     }
     .browser-note {
       margin-top: 40px;
-      font-size: 0.85em;
-      color: #777;
-      border-top: 1px solid #2a2a2a;
-      padding-top: 16px;
+      font-size: 0.9em;
+      color: #666;
     }
-    a { color: #ff3b30; }
   </style>
 </head>
 <body>
-  <img class="logo" src="logo.png" alt="Mindburner logo">
+  <img class="logo" src="logo.png" alt="Logo">
 
   <h1>MIDI-ANALYSER-BLE</h1>
-  <p class="sub">Firmware Installer — <strong id="version-display">Loading version...</strong></p>
+  <p class="sub">Firmware Installer — <strong id="version-display">Loading...</strong></p>
 
   <ol>
-    <li>Connect the device to your computer with a USB cable</li>
+    <li>Connect your device via USB</li>
     <li>Click the button below</li>
-    <li>Choose the correct port when prompted, then click <b>Install</b></li>
+    <li>Select the correct COM port and click <strong>Install</strong></li>
   </ol>
 
   <esp-web-install-button 
-    manifest="manifest.json?v=3.7">
+    manifest="manifest.json">
   </esp-web-install-button>
 
+  <!-- Changelog Section -->
+  <div class="changelog">
+    <h3>What's New</h3>
+    <ul id="changelog-list">
+      <!-- Update this list when you release new versions -->
+      <li><strong>3.7</strong> - Major improvements and bug fixes</li>
+      <li><strong>3.1</strong> - Initial public release</li>
+    </ul>
+  </div>
+
   <p class="browser-note">
-    Works in Google Chrome, Microsoft Edge, or Opera.<br>
-    Not supported in Safari or Firefox.
+    Best used in Chrome / Edge<br>
+    <small>Version is automatically loaded from manifest.json</small>
   </p>
 
   <script>
-    // Automatic version detection
     async function loadVersion() {
       try {
-        const response = await fetch('manifest.json?v=' + Date.now());
-        const manifest = await response.json();
+        const ts = Date.now();
+        const res = await fetch(`manifest.json?ts=${ts}`);
+        const data = await res.json();
         
-        const version = manifest.version || "Latest";
-        document.getElementById('version-display').textContent = `Version ${version}`;
-        
-        // Optional: Also update the manifest URL on the button with latest cachebuster
-        const button = document.querySelector('esp-web-install-button');
-        if (button) {
-          button.setAttribute('manifest', `manifest.json?v=${Date.now()}`);
-        }
-      } catch (e) {
-        console.error("Could not load version", e);
-        document.getElementById('version-display').textContent = "Version Unknown";
+        const ver = data.version || "Latest";
+        document.getElementById('version-display').textContent = `Version ${ver}`;
+      } catch (err) {
+        document.getElementById('version-display').textContent = "Latest Version";
       }
     }
-
-    // Load version when page loads
     window.addEventListener('load', loadVersion);
   </script>
 </body>
