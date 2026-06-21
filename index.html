@@ -56,7 +56,7 @@
   <img class="logo" src="logo.png" alt="Mindburner logo">
 
   <h1>MIDI-ANALYSER-BLE</h1>
-  <p class="sub">Firmware Installer — <strong>Version 3.7</strong></p>
+  <p class="sub">Firmware Installer — <strong id="version-display">Loading version...</strong></p>
 
   <ol>
     <li>Connect the device to your computer with a USB cable</li>
@@ -72,5 +72,30 @@
     Works in Google Chrome, Microsoft Edge, or Opera.<br>
     Not supported in Safari or Firefox.
   </p>
+
+  <script>
+    // Automatic version detection
+    async function loadVersion() {
+      try {
+        const response = await fetch('manifest.json?v=' + Date.now());
+        const manifest = await response.json();
+        
+        const version = manifest.version || "Latest";
+        document.getElementById('version-display').textContent = `Version ${version}`;
+        
+        // Optional: Also update the manifest URL on the button with latest cachebuster
+        const button = document.querySelector('esp-web-install-button');
+        if (button) {
+          button.setAttribute('manifest', `manifest.json?v=${Date.now()}`);
+        }
+      } catch (e) {
+        console.error("Could not load version", e);
+        document.getElementById('version-display').textContent = "Version Unknown";
+      }
+    }
+
+    // Load version when page loads
+    window.addEventListener('load', loadVersion);
+  </script>
 </body>
 </html>
