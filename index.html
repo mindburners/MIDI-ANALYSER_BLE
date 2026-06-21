@@ -1,46 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>MIDI-ANALYSER-BLE — Firmware Installer</title>
-<script type="module" src="https://unpkg.com/esp-web-tools@9/dist/web/install-button.js?module"></script>
-<style>
-  body {
-    font-family: -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
-    max-width: 480px;
-    margin: 60px auto;
-    text-align: center;
-    color: #eee;
-    background: #0c0c0c;
-    padding: 0 20px 50px;
-  }
-  img.logo {
-    width: 150px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-  }
-  h1 { font-size: 1.4em; margin-bottom: 0.1em; letter-spacing: 0.5px; }
-  .sub { color: #999; margin-bottom: 30px; }
-  ol { text-align: left; color: #ccc; line-height: 1.6; }
-  .browser-note {
-    margin-top: 30px;
-    font-size: 0.85em;
-    color: #777;
-    border-top: 1px solid #2a2a2a;
-    padding-top: 16px;
-  }
-  esp-web-install-button {
-    display: block;
-    margin: 24px 0;
-  }
-  a { color: #ff3b30; }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MIDI-ANALYSER-BLE — Firmware Installer</title>
+  <script type="module" src="https://unpkg.com/esp-web-tools@9/dist/web/install-button.js?module"></script>
+  
+  <style>
+    body {
+      font-family: -apple-system, Segoe UI, Helvetica, Arial, sans-serif;
+      max-width: 480px;
+      margin: 60px auto;
+      text-align: center;
+      color: #eee;
+      background: #0c0c0c;
+      padding: 0 20px 50px;
+    }
+    img.logo {
+      width: 150px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    h1 { 
+      font-size: 1.4em; 
+      margin-bottom: 0.1em; 
+      letter-spacing: 0.5px; 
+    }
+    .sub { 
+      color: #999; 
+      margin-bottom: 30px; 
+      font-size: 1.1em;
+    }
+    ol { 
+      text-align: left; 
+      color: #ccc; 
+      line-height: 1.6; 
+      max-width: 380px;
+      margin: 0 auto;
+    }
+    esp-web-install-button {
+      display: block;
+      margin: 30px 0;
+    }
+    .browser-note {
+      margin-top: 40px;
+      font-size: 0.85em;
+      color: #777;
+      border-top: 1px solid #2a2a2a;
+      padding-top: 16px;
+    }
+    a { color: #ff3b30; }
+  </style>
 </head>
 <body>
   <img class="logo" src="logo.png" alt="Mindburner logo">
+
   <h1>MIDI-ANALYSER-BLE</h1>
-  <p class="sub">Firmware Installer</p>
+  <p class="sub">Firmware Installer — <strong>Version 3.7</strong></p>
 
   <ol>
     <li>Connect the device to your computer with a USB cable</li>
@@ -48,7 +64,9 @@
     <li>Choose the correct port when prompted, then click <b>Install</b></li>
   </ol>
 
-  <esp-web-install-button manifest="manifest.json"></esp-web-install-button>
+  <esp-web-install-button 
+    manifest="manifest.json?v=3.7">
+  </esp-web-install-button>
 
   <p class="browser-note">
     Works in Google Chrome, Microsoft Edge, or Opera.<br>
