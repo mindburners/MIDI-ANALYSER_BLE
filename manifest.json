@@ -1,6 +1,6 @@
 {
   "name": "MIDI-ANALYSER-BLE Firmware",
-  "version": "3.8",
+  "version": "4",
   "new_install_prompt_erase": true,
   "builds": [
     {
